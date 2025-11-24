@@ -33,7 +33,15 @@ cd Whatsapp-Nextcloud-Bridge
 npm install
 ```
 
-### 3. Configure the Bridge
+### 3. (Optional) Verify Installation
+
+Run the verification script to check your setup:
+
+```bash
+./verify.sh
+```
+
+### 4. Configure the Bridge
 
 Copy the example environment file and edit it with your details:
 
@@ -62,7 +70,7 @@ The chat ID will be displayed in the logs when you first receive a message. Alte
 - For individual chats: `[country_code][phone_number]@c.us` (e.g., `1234567890@c.us`)
 - For group chats: Run the bridge once and check the logs when messages are received
 
-### 4. Start the Bridge
+### 5. Start the Bridge
 
 ```bash
 npm start
@@ -168,28 +176,31 @@ All configuration is done via environment variables:
 
 ## Troubleshooting
 
-### QR Code Not Appearing
+For detailed troubleshooting information, see the [Troubleshooting Guide](docs/TROUBLESHOOTING.md).
 
-Make sure you're running the bridge in a terminal that supports QR code display. If using Docker, use `docker logs -f container-name` to see the logs.
+### Quick Fixes
 
-### Authentication Failures
+**QR Code Not Appearing**
+- Use `docker logs -f container-name` for Docker
+- Use `sudo journalctl -u whatsapp-nextcloud-bridge -f` for systemd
 
-1. Delete the `session` directory
-2. Restart the bridge
-3. Scan the QR code again
+**Authentication Failures**
+```bash
+rm -rf session/
+npm start  # Scan QR code again
+```
 
-### Messages Not Being Forwarded
+**Messages Not Being Forwarded**
+- Check logs for errors
+- Verify configuration in `.env`
+- See [Troubleshooting Guide](docs/TROUBLESHOOTING.md) for detailed steps
 
-1. Check the logs for errors
-2. Verify your configuration in `.env`
-3. Ensure the chat IDs and tokens are correct
-4. Make sure your Nextcloud user has access to the Talk conversation
+## Additional Documentation
 
-### Connection Issues
-
-- Ensure your Nextcloud instance is accessible from the server running the bridge
-- Check that Nextcloud Talk is properly installed and configured
-- Verify firewall rules allow outbound connections
+- [Message Flow Examples](docs/MESSAGE_FLOW.md) - See how messages are formatted and forwarded
+- [Troubleshooting Guide](docs/TROUBLESHOOTING.md) - Detailed solutions for common issues
+- [Systemd Installation](systemd/INSTALL.md) - Run as a Linux system service
+- [Contributing](CONTRIBUTING.md) - Guidelines for contributing to the project
 
 ## Security Considerations
 

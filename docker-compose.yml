@@ -1,0 +1,13 @@
+version: '3.8'
+
+services:
+  whatsapp-nextcloud-bridge:
+    build: .
+    container_name: whatsapp-nextcloud-bridge
+    env_file:
+      - .env
+    volumes:
+      - ./session:/app/session
+    restart: unless-stopped
+    environment:
+      - NODE_ENV=production

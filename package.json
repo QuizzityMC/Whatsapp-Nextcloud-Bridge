@@ -1,0 +1,20 @@
+{
+  "name": "whatsapp-nextcloud-bridge",
+  "version": "1.0.0",
+  "description": "A seamless bridge between WhatsApp and Nextcloud Talk",
+  "main": "src/index.js",
+  "type": "module",
+  "scripts": {
+    "start": "node src/index.js",
+    "dev": "node --watch src/index.js"
+  },
+  "keywords": ["whatsapp", "nextcloud", "bridge", "chat"],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "whatsapp-web.js": "^1.23.0",
+    "qrcode-terminal": "^0.12.0",
+    "axios": "^1.12.0",
+    "dotenv": "^16.3.1"
+  }
+}

@@ -257,6 +257,32 @@ This uses Node's watch mode to automatically restart on file changes.
 └── README.md                 # This file
 ```
 
+## Frequently Asked Questions
+
+### Do I need a separate phone number for this bridge?
+
+**No!** This is one of the most common questions. The bridge uses **WhatsApp Web** technology - you just scan a QR code with your existing WhatsApp account. No second phone number, no separate SIM card needed!
+
+### How does the bridge appear in WhatsApp?
+
+The bridge links to your existing WhatsApp account as a device (like WhatsApp Web). Messages sent from Nextcloud to WhatsApp will appear to come from "You" (your account), but they include the original sender's name in the message text (e.g., `[Nextcloud] *Alice*: Hi!`).
+
+### Can I use this with WhatsApp Business?
+
+Yes! The setup is exactly the same. Just scan the QR code with your WhatsApp Business account.
+
+### Will this log me out of WhatsApp Web?
+
+No. WhatsApp supports multiple linked devices simultaneously. The bridge is just another linked device.
+
+### What happens if my phone is offline?
+
+WhatsApp's multi-device feature allows the bridge to work even when your phone is offline. However, your phone needs to be online at least once every 14 days to keep devices linked.
+
+### Can I bridge multiple chats?
+
+Yes! Run multiple instances of the bridge with different configurations. See the [Tutorial](docs/TUTORIAL.md#bridging-multiple-chats) for details.
+
 ## Contributing
 
 Contributions are welcome! Please feel free to submit a Pull Request.

@@ -2,6 +2,27 @@
 
 This guide helps you solve common issues with the WhatsApp-Nextcloud Bridge.
 
+## Frequently Asked Questions
+
+### Do I need a separate phone number?
+
+**No!** This is a common misunderstanding. The bridge uses **WhatsApp Web** technology:
+- ❌ You do **NOT** need a second phone number
+- ❌ You do **NOT** need a separate SIM card  
+- ✅ You use your **existing WhatsApp account**
+- ✅ The bridge links as a device (like WhatsApp Web or Desktop)
+
+When you scan the QR code, you're linking the bridge to your existing account, just like you would link WhatsApp Web.
+
+### Why do messages in WhatsApp show as coming from me?
+
+This is normal! The bridge uses your WhatsApp account as a linked device, so:
+- Messages sent to WhatsApp appear to come from "You"
+- The message includes the actual sender's name (e.g., `[Nextcloud] *Alice*: Hi!`)
+- This is how WhatsApp's linked device system works
+
+Think of it like WhatsApp Web - when you send messages from WhatsApp Web, they also appear as from "You" on your phone.
+
 ## Installation Issues
 
 ### "npm install" fails with Chromium download error
@@ -58,8 +79,26 @@ npm install
 # Stop the bridge
 rm -rf session/
 npm start
-# Scan the QR code again
+# Scan the QR code again with your existing WhatsApp account
 ```
+
+**Note:** Your phone needs internet connection at least once every 14 days to keep linked devices active. If your phone is offline too long, you may need to re-link the bridge.
+
+### "Can't link device" or linking fails
+
+**Problem:** Unable to scan QR code or linking keeps failing.
+
+**Possible causes:**
+1. Too many linked devices (WhatsApp has a limit)
+2. Phone offline or poor connection
+3. QR code expired (they expire after ~60 seconds)
+
+**Solutions:**
+1. Check your linked devices in WhatsApp Settings → Linked Devices
+2. Remove unused devices if you've reached the limit
+3. Ensure your phone has a stable internet connection
+4. Restart the bridge to get a fresh QR code
+5. Try from a different network if persistent issues occur
 
 ## Message Forwarding Issues
 

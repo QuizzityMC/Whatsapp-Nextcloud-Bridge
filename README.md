@@ -2,6 +2,8 @@
 
 A seamless, easy-to-setup bridge that connects WhatsApp and Nextcloud Talk, allowing messages to flow bidirectionally between the two platforms.
 
+> **⚡ No separate phone number needed!** This bridge uses WhatsApp Web's linked device feature - just scan a QR code with your existing WhatsApp account.
+
 ## Features
 
 - 🔄 **Bidirectional messaging**: Messages flow seamlessly in both directions
@@ -16,9 +18,13 @@ A seamless, easy-to-setup bridge that connects WhatsApp and Nextcloud Talk, allo
 
 - Node.js 18 or higher
 - A Nextcloud instance with Talk app installed
-- A WhatsApp account
+- Your existing WhatsApp account (no separate phone number required!)
 
 ## Quick Start
+
+**📖 For a comprehensive step-by-step guide**, see the [Complete Tutorial](docs/TUTORIAL.md)
+
+**⚡ Quick setup for experienced users:**
 
 ### 1. Clone the Repository
 
@@ -76,12 +82,14 @@ The chat ID will be displayed in the logs when you first receive a message. Alte
 npm start
 ```
 
-On first run, you'll see a QR code in the terminal. Scan it with your WhatsApp mobile app:
+On first run, you'll see a QR code in the terminal. **You'll use your existing WhatsApp account** - no separate phone number needed!
 
 1. Open WhatsApp on your phone
-2. Go to Settings → Linked Devices
+2. Go to Settings → Linked Devices (or the three-dot menu → Linked Devices)
 3. Tap "Link a Device"
 4. Scan the QR code displayed in the terminal
+
+**How it works:** The bridge acts as a linked device (like WhatsApp Web) to your existing WhatsApp account. You don't need a second phone number - it's all connected to your current WhatsApp!
 
 Once authenticated, the bridge will start forwarding messages automatically!
 
@@ -168,6 +176,19 @@ All configuration is done via environment variables:
 
 ## How It Works
 
+### WhatsApp Connection (No Separate Phone Number!)
+
+The bridge uses **WhatsApp Web** technology, which means:
+- ❌ You do **NOT** need a second phone number or SIM card
+- ✅ You use your **existing WhatsApp account**
+- ✅ The bridge appears as a "Linked Device" in WhatsApp (like WhatsApp Web or Desktop)
+- ✅ Your phone stays the primary device
+- ✅ All messages sync across devices
+
+When you scan the QR code, the bridge links to your WhatsApp account just like WhatsApp Web does. You can manage linked devices in WhatsApp Settings → Linked Devices.
+
+### Message Flow
+
 1. **WhatsApp → Nextcloud**: When a message is received in the configured WhatsApp chat, it's forwarded to Nextcloud Talk with a `[WhatsApp]` prefix and the sender's name.
 
 2. **Nextcloud → WhatsApp**: When a message is posted in the configured Nextcloud Talk conversation, it's forwarded to WhatsApp with a `[Nextcloud]` prefix and the sender's name.
@@ -197,6 +218,7 @@ npm start  # Scan QR code again
 
 ## Additional Documentation
 
+- **[Complete Step-by-Step Tutorial](docs/TUTORIAL.md)** - Comprehensive guide for first-time setup ⭐ **Start here!**
 - [Message Flow Examples](docs/MESSAGE_FLOW.md) - See how messages are formatted and forwarded
 - [Troubleshooting Guide](docs/TROUBLESHOOTING.md) - Detailed solutions for common issues
 - [Systemd Installation](systemd/INSTALL.md) - Run as a Linux system service

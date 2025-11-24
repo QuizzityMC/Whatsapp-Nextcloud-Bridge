@@ -106,7 +106,7 @@ This will download all required packages, including the WhatsApp Web client libr
 
 ### Step 3: Verify Installation (Optional but Recommended)
 
-Run the verification script:
+The repository includes a verification script to check your setup:
 
 ```bash
 chmod +x verify.sh
@@ -382,7 +382,7 @@ The bridge is now fully configured and running! You should see:
 ### Running as a Service
 
 The bridge should run continuously. See:
-- [Systemd Installation Guide](../systemd/INSTALL.md) for Linux
+- [Systemd Installation Guide](../../systemd/INSTALL.md) for Linux
 - [Docker Deployment](#docker-deployment) for containerized setup
 
 ### Docker Deployment
@@ -453,9 +453,20 @@ npm start
 
 #### Change polling interval
 
-Edit `src/nextcloud-client.js`:
+By default, the bridge polls Nextcloud for new messages every 5 seconds. To reduce server load, you can increase this interval.
+
+Edit `src/nextcloud-client.js` and find the `startPolling` call (around line 107):
+
 ```javascript
+// Change from default 5000ms to 10000ms (10 seconds)
 startPolling(10000)  // Poll every 10 seconds instead of 5
+```
+
+Or modify where it's called in `src/message-bridge.js` (line 26):
+
+```javascript
+// Start polling Nextcloud messages every 10 seconds
+this.nextcloudClient.startPolling(10000);
 ```
 
 #### Modify message format

@@ -85,7 +85,9 @@ npm start
 On first run, you'll see a QR code in the terminal. **You'll use your existing WhatsApp account** - no separate phone number needed!
 
 1. Open WhatsApp on your phone
-2. Go to Settings → Linked Devices (or the three-dot menu → Linked Devices)
+2. Go to Settings → Linked Devices
+   - **Android**: Tap the three-dot menu (⋮) → Linked Devices
+   - **iOS**: Tap Settings (gear icon) → Linked Devices
 3. Tap "Link a Device"
 4. Scan the QR code displayed in the terminal
 

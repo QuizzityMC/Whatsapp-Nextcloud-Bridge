@@ -138,6 +138,10 @@ docker run -d \
   whatsapp-nextcloud-bridge
 ```
 
+## Systemd Service Deployment (Linux)
+
+For running as a system service on Linux, see the [Systemd Installation Guide](systemd/INSTALL.md).
+
 ## Configuration Options
 
 All configuration is done via environment variables:

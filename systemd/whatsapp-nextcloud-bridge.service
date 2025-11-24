@@ -1,0 +1,23 @@
+[Unit]
+Description=WhatsApp-Nextcloud Bridge
+After=network.target
+
+[Service]
+Type=simple
+User=whatsapp-bridge
+WorkingDirectory=/opt/whatsapp-nextcloud-bridge
+Environment="NODE_ENV=production"
+EnvironmentFile=/opt/whatsapp-nextcloud-bridge/.env
+ExecStart=/usr/bin/node src/index.js
+Restart=always
+RestartSec=10
+
+# Security hardening
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectSystem=strict
+ProtectHome=true
+ReadWritePaths=/opt/whatsapp-nextcloud-bridge/session
+
+[Install]
+WantedBy=multi-user.target

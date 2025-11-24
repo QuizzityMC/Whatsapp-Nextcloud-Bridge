@@ -36,7 +36,15 @@ class MessageBridge {
         return;
       }
 
-      const sender = message._data.notifyName || message.from;
+      // Get sender name from message contact or fallback to phone number
+      let sender = message.from;
+      try {
+        const contact = await message.getContact();
+        sender = contact.pushname || contact.name || message.from;
+      } catch (error) {
+        this.logger.debug('Could not get contact name, using phone number');
+      }
+
       const messageText = message.body;
 
       // Skip empty messages

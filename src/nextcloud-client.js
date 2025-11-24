@@ -97,8 +97,8 @@ class NextcloudClient {
         }
       }
     } catch (error) {
-      // Don't log timeout errors as they're expected
-      if (error.code !== 'ECONNABORTED') {
+      // Don't log timeout or abort errors as they're expected during long polling
+      if (error.code !== 'ECONNABORTED' && error.code !== 'ETIMEDOUT' && !error.message?.includes('timeout')) {
         this.logger.error('Error polling messages:', error.message);
       }
     }
@@ -106,15 +106,23 @@ class NextcloudClient {
 
   startPolling(intervalMs = 5000) {
     this.logger.info('Starting message polling...');
-    this.pollingInterval = setInterval(() => {
-      this.pollMessages();
-    }, intervalMs);
+    
+    // Use recursive setTimeout to prevent overlapping requests
+    const poll = async () => {
+      await this.pollMessages();
+      if (this.pollingInterval !== null) {
+        this.pollingInterval = setTimeout(poll, intervalMs);
+      }
+    };
+    
+    // Start polling
+    this.pollingInterval = setTimeout(poll, 0);
   }
 
   stopPolling() {
     if (this.pollingInterval) {
       this.logger.info('Stopping message polling...');
-      clearInterval(this.pollingInterval);
+      clearTimeout(this.pollingInterval);
       this.pollingInterval = null;
     }
   }

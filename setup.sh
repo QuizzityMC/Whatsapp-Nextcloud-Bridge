@@ -27,7 +27,9 @@ echo ""
 
 read -p "Nextcloud URL (e.g., https://cloud.example.com): " NEXTCLOUD_URL
 read -p "Nextcloud Username: " NEXTCLOUD_USERNAME
-read -sp "Nextcloud Password: " NEXTCLOUD_PASSWORD
+echo "⚠️  For better security, use a Nextcloud App Password instead of your main password."
+echo "   You can create one at: Settings → Security → Devices & sessions"
+read -sp "Nextcloud Password (or App Password): " NEXTCLOUD_PASSWORD
 echo ""
 read -p "Nextcloud Talk Token (from conversation URL): " NEXTCLOUD_TALK_TOKEN
 read -p "WhatsApp Chat ID (e.g., 1234567890@c.us): " WHATSAPP_CHAT_ID

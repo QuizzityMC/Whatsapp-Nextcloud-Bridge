@@ -66,15 +66,27 @@ class WhatsAppClient {
     this.logger.info('Initializing WhatsApp client...');
     await this.client.initialize();
     
-    // Wait for client to be ready
+    // Wait for client to be ready with timeout
     if (!this.isReady) {
-      await new Promise((resolve) => {
-        const checkReady = setInterval(() => {
-          if (this.isReady) {
-            clearInterval(checkReady);
-            resolve();
-          }
-        }, 100);
+      await new Promise((resolve, reject) => {
+        const timeout = setTimeout(() => {
+          reject(new Error('WhatsApp client initialization timeout (60s)'));
+        }, 60000);
+        
+        const readyHandler = () => {
+          clearTimeout(timeout);
+          resolve();
+        };
+        
+        // Set up the event listener first to avoid race condition
+        this.client.once('ready', readyHandler);
+        
+        // Check if already ready after setting up listener
+        if (this.isReady) {
+          clearTimeout(timeout);
+          this.client.removeListener('ready', readyHandler);
+          resolve();
+        }
       });
     }
   }

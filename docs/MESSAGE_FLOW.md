@@ -2,6 +2,29 @@
 
 This document shows examples of how messages flow between WhatsApp and Nextcloud Talk.
 
+## Important: Understanding Message Appearance
+
+### How Messages Appear in WhatsApp
+
+Since the bridge uses **your WhatsApp account** as a linked device:
+- Messages sent from Nextcloud to WhatsApp appear to come from **you** (your WhatsApp account)
+- In the chat, you'll see these messages with **your name**
+- The prefix `[Nextcloud]` and the actual sender's name help you identify who originally sent the message
+
+**Example in WhatsApp:**
+```
+You: [Nextcloud] *Alice*: Hi from Nextcloud!
+```
+
+This is because the bridge is linked to your account - it's sending on your behalf, but the prefix and name show the real sender.
+
+### How Messages Appear in Nextcloud Talk
+
+Messages from WhatsApp show the original sender's name:
+```
+[WhatsApp] **John**: Hello from WhatsApp!
+```
+
 ## WhatsApp → Nextcloud Talk
 
 When someone sends a message in WhatsApp:
@@ -27,8 +50,10 @@ Alice: Hi from Nextcloud!
 
 **WhatsApp receives:**
 ```
-[Nextcloud] *Alice*: Hi from Nextcloud!
+You: [Nextcloud] *Alice*: Hi from Nextcloud!
 ```
+
+**Note:** In WhatsApp, this appears as a message from "You" because the bridge uses your WhatsApp account. The prefix and name `*Alice*` show who actually sent it.
 
 ## Customizing Prefixes
 
@@ -48,8 +73,10 @@ With custom prefixes:
 
 **Nextcloud → WhatsApp:**
 ```
-📱 *Alice*: Hi!
+You: 📱 *Alice*: Hi!
 ```
+
+(Remember: In WhatsApp, you'll see "You:" before the message since it's your account sending it)
 
 ## Message Format
 
@@ -78,3 +105,4 @@ With custom prefixes:
 - Messages from other chats are ignored
 - The bridge runs locally on your server - no third-party services involved
 - All authentication data stays on your server
+- **The bridge uses your WhatsApp account**: Messages sent to WhatsApp will appear to come from you, but the sender's name is included in the message text to show who actually sent it
